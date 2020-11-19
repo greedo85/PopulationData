@@ -14,7 +14,6 @@ public class PopulationData {
     public void generatePeople( int number ) {
         for (int i = 0; i < number; i++) {
             citizens.add(new Citizen());
-            System.out.println(citizens);
         }
     }
 }

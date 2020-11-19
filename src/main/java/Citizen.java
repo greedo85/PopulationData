@@ -32,13 +32,13 @@ public class Citizen {
 
     public void setDates() {
         birthDate = generateDate();
-        passDate = generateDate();
-        if (Math.random() >= 0.7) {
-            passDate=null;
-        } else
+        passDate = null;
+        if (Math.random() <= 0.7) {
             passDate = generateDate();
-        while (passDate.isEqual(birthDate) || passDate.isBefore(birthDate)&&!passDate.equals(null)) {
-            passDate = generateDate();
+        } else {
+            while (passDate.isEqual(birthDate) || passDate.isBefore(birthDate) && !passDate.equals(null)) {
+                passDate = generateDate();
+            }
         }
     }
 
