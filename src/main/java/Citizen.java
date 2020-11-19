@@ -16,8 +16,7 @@ public class Citizen {
     private char martialStatus;
 
     public Citizen() {
-        this.birthDate = generateDate();
-        this.passDate = generateDate();
+        setDates();
         this.adress = generateAdress();
         this.gender = generateGender();
         this.martialStatus = 'Z';
@@ -29,6 +28,18 @@ public class Citizen {
         int month = (int) (Math.random() * (12 - 1)) + 1;
         int day = (int) (Math.random() * (28 - 1)) + 1;
         return LocalDate.of(year, month, day);
+    }
+
+    public void setDates() {
+        birthDate = generateDate();
+        passDate = generateDate();
+        while (passDate.isEqual(birthDate) || passDate.isBefore(birthDate)) {
+            passDate = generateDate();
+        }
+        //przyjmujemy że jeśli ktoś urodził się po 1997 to jeszcze żyje
+        if (birthDate.isAfter(LocalDate.of(1997, 01, 01))) {
+            passDate = null;
+        }
     }
 
     //zakres adresów musi być taki żeby się powtarzały
@@ -44,9 +55,8 @@ public class Citizen {
 
     public char generateGender() {
 
-        int number = (int)( Math.random() * (3 - 1) + 1);
-        System.out.println("Numer"+number);
-        if (number ==1) {
+        int number = (int) (Math.random() * (3 - 1) + 1);
+        if (number == 1) {
             return 'K';
         } else
             return 'M';

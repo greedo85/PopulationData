@@ -5,12 +5,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class PopulationDataTest {
 
-    /*static PopulationData populationData;
+    static PopulationData populationData;
 
     @BeforeAll
     public static void init() {
         populationData = new PopulationData(10);
-    }*/
+    }
 
     @Test
     public void generatePersonTest() {
