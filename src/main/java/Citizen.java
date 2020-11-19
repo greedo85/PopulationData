@@ -33,12 +33,12 @@ public class Citizen {
     public void setDates() {
         birthDate = generateDate();
         passDate = generateDate();
-        while (passDate.isEqual(birthDate) || passDate.isBefore(birthDate)) {
+        if (Math.random() >= 0.7) {
+            passDate=null;
+        } else
             passDate = generateDate();
-        }
-        //przyjmujemy że jeśli ktoś urodził się po 1997 to jeszcze żyje
-        if (birthDate.isAfter(LocalDate.of(1997, 01, 01))) {
-            passDate = null;
+        while (passDate.isEqual(birthDate) || passDate.isBefore(birthDate)&&!passDate.equals(null)) {
+            passDate = generateDate();
         }
     }
 

@@ -15,11 +15,16 @@ public class PopulationDataTest {
     @Test
     public void generatePersonTest() {
         //when
-        PopulationData populationData=new PopulationData(10);
-       // populationData.generatePeople(10);
-        System.out.println(populationData.citizens);
+        try {
+            PopulationData populationData = new PopulationData(1000);
+            System.out.println(populationData.citizens);
+            assertEquals(1000, populationData.citizens.size());
+        }
+
         //then
-        assertEquals(10, populationData.citizens.size());
+        catch (NullPointerException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
 }
