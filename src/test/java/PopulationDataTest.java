@@ -15,16 +15,14 @@ public class PopulationDataTest {
     @Test
     public void generatePersonTest() {
         //when
-        try {
+
             PopulationData populationData = new PopulationData(1000);
             System.out.println(populationData.citizens);
-            assertEquals(1000, populationData.citizens.size());
-        }
+
 
         //then
-        catch (NullPointerException e) {
-            System.out.println(e.getMessage());
-        }
+            assertEquals(1000, populationData.citizens.size());
+
     }
 
 }

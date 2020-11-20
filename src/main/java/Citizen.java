@@ -1,14 +1,11 @@
-import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.ToString;
 
 import java.time.LocalDate;
-import java.util.Random;
 
 
 @Getter
-@ToString
-public class Citizen {
+
+public class Citizen  {
     private LocalDate birthDate;
     private LocalDate passDate;
     private String adress;
@@ -19,7 +16,7 @@ public class Citizen {
         setDates();
         this.adress = generateAdress();
         this.gender = generateGender();
-        this.martialStatus = 'Z';
+        this.martialStatus = generateMartialStatus();
     }
 
     public LocalDate generateDate() {
@@ -34,9 +31,10 @@ public class Citizen {
         birthDate = generateDate();
         passDate = null;
         if (Math.random() <= 0.7) {
-            passDate = generateDate();
+            passDate = null;
         } else {
-            while (passDate.isEqual(birthDate) || passDate.isBefore(birthDate) && !passDate.equals(null)) {
+            passDate = generateDate();
+            while (birthDate.isEqual(passDate) || birthDate.isAfter(passDate)) {
                 passDate = generateDate();
             }
         }
@@ -53,12 +51,43 @@ public class Citizen {
         return adress;
     }
 
-    public char generateGender() {
-
+    FunctionalInterface generateGender = () ->
+    {
         int number = (int) (Math.random() * (3 - 1) + 1);
         if (number == 1) {
             return 'K';
         } else
             return 'M';
+    };
+
+    FunctionalInterface generateMartialStatus = () ->
+    {
+        int number = (int) (Math.random() * (3 - 1) + 1);
+        if (number == 1) {
+            return 'Z';
+        } else
+            return 'W';
+    };
+
+    public char generateMartialStatus() {
+        return generateMartialStatus.method();
     }
+
+    public char generateGender() {
+        return generateGender.method();
+    }
+
+
+    @Override
+    public String toString() {
+        return "Citizen{" +
+                "birthDate=" + birthDate +
+                ", passDate=" + passDate +
+                ", adress='" + adress + '\'' +
+                ", gender=" + gender +
+                ", martialStatus=" + martialStatus +
+                '}'+'\n';
+    }
+
+
 }

@@ -12,7 +12,7 @@ public class CitizenTest {
         boolean checkDates = true;
         try {
             for (Citizen c : populationData.citizens) {
-                if (c.getPassDate().isBefore(c.getBirthDate()) && !(c.getPassDate().equals(null))) {
+                if (c.getPassDate().isBefore(c.getBirthDate()) ) {
                     checkDates = false;
                     break;
                 }

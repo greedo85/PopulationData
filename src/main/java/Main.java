@@ -1,13 +1,11 @@
 public class Main {
     public static void main( String[] args ) {
-        PopulationData populationData=null;
-        try {
-            populationData = new PopulationData(1000);
-        System.out.println(populationData.citizens);
-        }
-        catch (NullPointerException e)
-        {
+        PopulationData populationData = new PopulationData(10000);
 
-        }
+        populationData.findKids();
+
+        populationData.passedIn5Years();
+
+        populationData.threeOldesSingles();
     }
 }
