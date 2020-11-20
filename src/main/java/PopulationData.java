@@ -1,5 +1,3 @@
-import com.google.common.cache.LoadingCache;
-import javafx.collections.transformation.SortedList;
 import lombok.ToString;
 
 import java.time.LocalDate;
@@ -43,13 +41,14 @@ public class PopulationData {
     }
 
     public List threeOldesSingles() {
-        List<Citizen> oldestSingles=citizens.stream().filter(v->
+        List<Citizen> oldestSingles = citizens.stream().filter(v ->
         {
-            return v.getMartialStatus()=='W'&&v.getPassDate()==null&&v.getGender()=='K';
-        }).sorted(new CitizenComparator()).collect(Collectors.toList());
-        List<Citizen>threeOldesSingles=oldestSingles.subList(0,2);
-        System.out.println("Najstarsze singielki: "+threeOldesSingles);
+            return v.getMartialStatus() == 'W' && v.getPassDate() == null && v.getGender() == 'K';
+        }).sorted(new BirthDateComparator()).distinct().collect(Collectors.toList());
+        List<Citizen> threeOldesSingles = oldestSingles.subList(0, 2);
+        System.out.println("Najstarsze singielki: " + threeOldesSingles);
         return threeOldesSingles;
     }
-    
+
+
 }
