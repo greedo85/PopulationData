@@ -1,8 +1,11 @@
+import javafx.collections.ObservableList;
 import lombok.ToString;
 
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @ToString
 public class PopulationData {
@@ -49,6 +52,16 @@ public class PopulationData {
         System.out.println("Najstarsze singielki: " + threeOldesSingles);
         return threeOldesSingles;
     }
+    public void averageLifetime()
+    {
+       List<Citizen>notDead = citizens.stream().filter((p)->(p.getPassDate()!=null)).collect(Collectors.toList());
+       List<Long> lifeTime=notDead.stream().map(c->(ChronoUnit.YEARS.between(c.getBirthDate(),c.getPassDate()))).collect(Collectors.toList());
+       long averageLifetime=(lifeTime.stream().reduce((long) 0,( x, y)->x+y))/lifeTime.size();
+       System.out.println("Lifetime: "+lifeTime);
+       System.out.println("Średnia: "+averageLifetime);
 
+        //(ChronoUnit.YEARS.between(p.getBirthDate(),p.getPassDate())));
 
+        //return averageLifetime;
+    }
 }

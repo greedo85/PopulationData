@@ -7,5 +7,7 @@ public class Main {
         populationData.passedIn5Years();
 
         populationData.threeOldesSingles();
+
+        populationData.averageLifetime();
     }
 }
