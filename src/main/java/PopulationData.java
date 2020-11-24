@@ -44,21 +44,26 @@ public class PopulationData {
     }
 
     public List threeOldesSingles() {
+        List<Citizen> threeOldesSingles=null;
         List<Citizen> oldestSingles = citizens.stream().filter(v ->
         {
             return v.getMartialStatus() == 'W' && v.getPassDate() == null && v.getGender() == 'K';
         }).sorted(new BirthDateComparator()).distinct().collect(Collectors.toList());
-        List<Citizen> threeOldesSingles = oldestSingles.subList(0, 2);
+        try {
+            threeOldesSingles = oldestSingles.subList(0, 2);
+        } catch (IndexOutOfBoundsException e) {
+            System.out.println("Brak singielek");
+        }
         System.out.println("Najstarsze singielki: " + threeOldesSingles);
         return threeOldesSingles;
     }
-    public void averageLifetime()
-    {
-       List<Citizen>notDead = citizens.stream().filter((p)->(p.getPassDate()!=null)).collect(Collectors.toList());
-       List<Long> lifeTime=notDead.stream().map(c->(ChronoUnit.YEARS.between(c.getBirthDate(),c.getPassDate()))).collect(Collectors.toList());
-       long averageLifetime=(lifeTime.stream().reduce((long) 0,( x, y)->x+y))/lifeTime.size();
-       System.out.println("Lifetime: "+lifeTime);
-       System.out.println("Średnia: "+averageLifetime);
+
+    public void averageLifetime() {
+        List<Citizen> notDead = citizens.stream().filter(( p ) -> (p.getPassDate() != null)).collect(Collectors.toList());
+        List<Long> lifeTime = notDead.stream().map(c -> (ChronoUnit.YEARS.between(c.getBirthDate(), c.getPassDate()))).collect(Collectors.toList());
+        long averageLifetime = (lifeTime.stream().reduce((long) 0, ( x, y ) -> x + y)) / notDead.size();
+        System.out.println("Lifetime: " + lifeTime);
+        System.out.println("Średnia: " + averageLifetime);
 
         //(ChronoUnit.YEARS.between(p.getBirthDate(),p.getPassDate())));
 
